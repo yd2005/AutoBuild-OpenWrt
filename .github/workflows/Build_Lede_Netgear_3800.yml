@@ -63,11 +63,12 @@ jobs:
       run: |
         wget $REPO_URL
         tar -zxvf 20200408.tar.gz
-        cd lede-20200408
+        mv -t lede-20200408 openwrt
+        cd openwrt
         echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
         
     - name: Update & Install feeds
-      working-directory: ./lede-20200408
+      working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
         ./scripts/feeds install -a
@@ -83,23 +84,23 @@ jobs:
     #  run: |
     #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon-jerrykuku
 
-    - name: Configuration Customization - Build_NanoPi_R2S
+    - name: Configuration Customization - Build_Netgear_3800
       env:
         CONFIG_FILE: 'Netgear_3800.config'
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede-20200408/.config
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
         
     - name: Download package
-      working-directory: ./lede-20200408
+      working-directory: ./openwrt
       run: |
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
         make download -j$(nproc)
     - name: Build firmware
-      working-directory: ./lede-20200408
+      working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
         make -j1 V=s
@@ -107,4 +108,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: OpenWrt
-        path: lede-20200408/bin
+        path: openwrt/bin
