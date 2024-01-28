@@ -63,7 +63,7 @@ jobs:
       run: |
         wget $REPO_URL
         tar -zxvf 20200408.tar.gz
-        mv -t lede-20200408 openwrt
+        mv lede-20200408 openwrt
         cd openwrt
         echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
         
