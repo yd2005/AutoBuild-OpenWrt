@@ -82,7 +82,7 @@ jobs:
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede-20200408/.config
         chmod +x ./customize.sh && ./customize.sh
-        cd openwrt && make defconfig
+        cd lede-20200408 && make defconfig
         
     - name: Download package
       working-directory: ./lede-20200408
