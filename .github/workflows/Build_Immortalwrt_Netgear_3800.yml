@@ -83,7 +83,7 @@ jobs:
 
     - name: Configuration Customization - Build_Netgear_3800
       env:
-        CONFIG_FILE: 'Netgear_3800.config'
+        CONFIG_FILE: 'immortalwrt_netgear_3800.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
