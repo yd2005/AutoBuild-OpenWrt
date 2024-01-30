@@ -93,8 +93,8 @@ jobs:
       working-directory: ./immortalwrt
       run: |
         make download -j$(nproc)
-     #   find dl -size -1024c -exec ls -l {} \;
-     #   find dl -size -1024c -exec rm -f {} \;
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware
       working-directory: ./immortalwrt
