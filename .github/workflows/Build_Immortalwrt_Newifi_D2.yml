@@ -87,7 +87,7 @@ jobs:
         CONFIG_FILE: 'immortalwrt_newifi_d2.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE immortalwrt/.config
-        chmod +x ./customize_im.sh && ./customize_im.sh
+    #    chmod +x ./customize_im.sh && ./customize_im.sh
         cd immortalwrt && make defconfig
         
     - name: Download package
