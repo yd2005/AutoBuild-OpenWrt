@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_Immortalwrt_Netgear_3800.config
+name: Build_Immortalwrt_Netgear_3800
 
 # Add a button to trigger the workflow
 on: 
