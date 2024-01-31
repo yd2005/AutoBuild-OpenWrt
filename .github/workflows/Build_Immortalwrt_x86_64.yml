@@ -60,7 +60,7 @@ jobs:
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/immortalwrt/immortalwrt
-        REPO_BRANCH: master
+        REPO_BRANCH: openwrt-18.06
       run: |
         git clone -b $REPO_BRANCH --single-branch --filter=blob:none $REPO_URL immortalwrt
         cd immortalwrt
@@ -72,19 +72,19 @@ jobs:
         ./scripts/feeds install -a
 
     #- name: Import external feeds - passwall
-    #  working-directory: ./openwrt
+    #  working-directory: ./immortalwrt
     #  run: |
     #    git clone https://github.com/xiaorouji/openwrt-passwall.git package/lienol
     #    git clone "your_github_link" package/"your_folder_name"      
 
     #- name: Import external feeds - JerryKuKu Argon
-    #  working-directory: ./openwrt
+    #  working-directory: ./immortalwrt
     #  run: |
     #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon-jerrykuku
 
     - name: Configuration Customization - Build_Newifi_D2
       env:
-        CONFIG_FILE: 'immortalwrt__x86_64.config'
+        CONFIG_FILE: 'immortalwrt_x86_64.config'
       run: |
         mv $CONFIG_FILE immortalwrt/.config
         cd immortalwrt && make defconfig
@@ -93,8 +93,8 @@ jobs:
       working-directory: ./immortalwrt
       run: |
         make download -j$(nproc)
-     #   find dl -size -1024c -exec ls -l {} \;
-     #   find dl -size -1024c -exec rm -f {} \;
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware
       working-directory: ./immortalwrt
@@ -105,5 +105,5 @@ jobs:
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: immortalwrt_x86_64
+        name: immortalwrt__x86_64
         path: immortalwrt/bin
