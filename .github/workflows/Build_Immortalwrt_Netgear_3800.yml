@@ -105,5 +105,5 @@ jobs:
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: immortalwrt_netgear_3800.config
+        name: immortalwrt_netgear_3800
         path: immortalwrt/bin
